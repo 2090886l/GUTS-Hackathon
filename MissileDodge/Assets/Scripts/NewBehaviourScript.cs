@@ -14,8 +14,8 @@ public class NewBehaviourScript : MonoBehaviour {
         {
             // todo if char is on controlPanel
             Vector3 p = Input.mousePosition;
-            Rigidbody2D rocketInstance = Instantiate(rocket, transform.position, Quaternion.Euler(p));
-            rocketInstance.velocity = new Vector2(1, 0); //nz ko praqt teq value-ta na vactor2 ama sh stani
+          //  Rigidbody2D rocketInstance = Instantiate(rocket, transform.position, Quaternion.Euler(p));
+           // rocketInstance.velocity = new Vector2(1, 0); //nz ko praqt teq value-ta na vactor2 ama sh stani
         }
 	}
 }
