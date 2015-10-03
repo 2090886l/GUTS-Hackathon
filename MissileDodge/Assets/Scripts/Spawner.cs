@@ -6,7 +6,6 @@ public class Spawner : MonoBehaviour {
 
 
 	public GameObject rocket;
-	public float speed;
 	public float startX;
 	public float endX;
 	public float roof;
@@ -39,12 +38,13 @@ public class Spawner : MonoBehaviour {
 	{
 		while (true)
 		{
+	
+			yield return new WaitForSeconds (1);
 
+			
 			Vector3 spawnPosition = new Vector3 (Random.Range(startX, endX), roof, 0);
 			Instantiate(rocket, spawnPosition, new Quaternion(0,0,0,0));
 			updateScore(spawnScore);
-	
-			yield return new WaitForSeconds (1);
 		}
 	}
 
@@ -64,13 +64,18 @@ public class Spawner : MonoBehaviour {
 	public void destroyBuilding() {
 		buildings --;
 		if (buildings == 0) {
-			Application.LoadLevel(Application.loadedLevel);
+			endGame();
 		}
 	}
 
 	public void updateScore(int score) {
 		Spawner.score += score;
 		text.text = "Score: " + Spawner.score;
+
+	}
+	public void endGame() {
+
+		Application.LoadLevel ("GameOver");
 
 	}
 }

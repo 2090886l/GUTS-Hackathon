@@ -33,7 +33,7 @@ public class OnHit : MonoBehaviour {
 
 		else if (other.tag == "Player") {
 			Destroy(other.gameObject);
-			Application.LoadLevel (Application.loadedLevel);
+			controller.GetComponent<Spawner>().endGame();
 		}
 	}
 }
