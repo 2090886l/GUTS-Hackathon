@@ -3,6 +3,9 @@ using System.Collections;
 
 public class OnHit : MonoBehaviour {
 
+
+	public GameObject fire;
+
 	private GameObject controller;
 	private int destroyScore = 10;
 
@@ -16,6 +19,7 @@ public class OnHit : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		//Debug.Log ("entered collider");
 		if (other.tag == "Ground") {
+			Instantiate (fire, this.gameObject.transform.position, new Quaternion(0,0,0,0));
 			Destroy (this.gameObject);
 		}
 
