@@ -17,7 +17,7 @@ public class FireKill : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		//Debug.Log ("entered collider");
 		if (other.tag == "Player") {
-			controller.GetComponent<Spawner> ().endGame ();
+			Spawner.endGame ();
 		}
 	}
 	

@@ -8,7 +8,7 @@ public class OnHit : MonoBehaviour {
 	public GameObject explosion;
 
 	private GameObject controller;
-	private int destroyScore = 10;
+	private int destroyScore = 100;
 
 	void Start() {
 
@@ -46,7 +46,7 @@ public class OnHit : MonoBehaviour {
 
 		else if (other.tag == "Player") {
 			Destroy(other.gameObject);
-			controller.GetComponent<Spawner>().endGame();
+			Spawner.endGame();
 		}
 	}
 }

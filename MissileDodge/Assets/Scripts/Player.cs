@@ -24,6 +24,12 @@ public class Player : MonoBehaviour
 			inCannon = true;
 			activeCannon = other;
 		}
+
+		if (other.tag == "Explosion") {
+			Destroy (this.gameObject);
+			Spawner.endGame();
+
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {

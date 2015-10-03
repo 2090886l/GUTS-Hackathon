@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour {
 	public Text text;
 	public static int score;
 
-	private int spawnScore = 100;
+	private int spawnScore = 20;
 	private int buildings;
 	private Vector3 targetPosition;
 	private GameObject[] cannons;
@@ -75,7 +75,7 @@ public class Spawner : MonoBehaviour {
 		text.text = "Score: " + Spawner.score;
 
 	}
-	public void endGame() {
+	public static void endGame() {
 
 		Application.LoadLevel ("GameOver");
 

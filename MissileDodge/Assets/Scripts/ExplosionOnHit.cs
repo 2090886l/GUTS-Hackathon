@@ -4,7 +4,11 @@ using System.Collections;
 public class ExplosionOnHit : MonoBehaviour {
 
 
+	public GameObject explosion;
+
+
 	private GameObject controller;
+
 	// Use this for initialization
 	void Start () {
 		controller = GameObject.FindGameObjectWithTag ("GameController");
@@ -12,10 +16,17 @@ public class ExplosionOnHit : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 
-		if (other.tag == "Building") {
+		if (this.CompareTag("Building") && other.CompareTag ("Rocket")) {
+			Debug.Log ("test");
+			Destroy(other.gameObject);
+			explosion = Instantiate(explosion, transform.position, new Quaternion(0,0,0,0)) as GameObject;
+			GameObject.Destroy(explosion, 2.0f);
 			Debug.Log ("entered collider");
-			Destroy (other.gameObject);
 			controller.GetComponent<Spawner> ().destroyBuilding ();
+			Destroy (this.gameObject);
+	
+
 		}
+
 	}
 }
