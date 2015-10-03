@@ -1,13 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Script : MonoBehaviour {
+public class FireKill : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+
+
+	private GameObject controller;
 	
+	void Start() {
+		
+		controller = GameObject.FindGameObjectWithTag ("GameController");
+		
+		
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		//Debug.Log ("entered collider");
+		if (other.tag == "Player") {
+			controller.GetComponent<Spawner> ().endGame ();
+		}
 	}
 	
+
 	// Update is called once per frame
 	void Update () {
 	
