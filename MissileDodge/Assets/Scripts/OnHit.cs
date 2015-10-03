@@ -19,7 +19,7 @@ public class OnHit : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		//Debug.Log ("entered collider");
 		if (other.tag == "Ground") {
-			Object temp = Instantiate (fire, this.gameObject.transform.position, new Quaternion(0,0,0,0));
+			Object temp = Instantiate (fire, this.gameObject.transform.position + new Vector3(0,0.5f,0) , new Quaternion(0,0,0,0));
 			Object.Destroy(temp, 5.0f);
 			Destroy (this.gameObject);
 		}
