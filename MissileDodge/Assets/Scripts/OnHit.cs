@@ -6,6 +6,7 @@ public class OnHit : MonoBehaviour {
 
 	public GameObject fire;
 	public GameObject explosion;
+	public GameObject points;
 
 	private GameObject controller;
 	private int destroyScore = 100;
@@ -26,16 +27,21 @@ public class OnHit : MonoBehaviour {
 		}
 
 		else if (other.tag == "Rocket") {
-			Destroy(other.gameObject);
-			Destroy(this.gameObject);
+
+			points = Instantiate(points,transform.position + new Vector3(0, 1, 0), new Quaternion(0,0,0,0)) as GameObject;
 			controller.GetComponent<Spawner>().updateScore(destroyScore);
+			GameObject.Destroy(points, 5.0f);
 			explosion = Instantiate(explosion, transform.position, new Quaternion(0,0,0,0)) as GameObject;
 			GameObject.Destroy(explosion, 2.0f);
+			Destroy(other.gameObject);
+			Destroy(this.gameObject);
 		}
 
 		else if (other.tag == "Explosion") {
 			Destroy(this.gameObject);
+			points = Instantiate(points,transform.position + new Vector3(0, 1, 0) , new Quaternion(0,0,0,0)) as GameObject;
 			controller.GetComponent<Spawner>().updateScore(destroyScore);
+			GameObject.Destroy(points, 5.0f);
 		}
 
 		else if (other.tag == "Building") {
