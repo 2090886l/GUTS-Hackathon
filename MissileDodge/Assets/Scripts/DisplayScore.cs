@@ -8,7 +8,7 @@ public class DisplayScore : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		endingScore.text = "Game Over  \n" + "Your score: " + Spawner.score + "\n";
+		endingScore.text =  "Your score: " + Spawner.score + "\n" + "\n";
 		endingScore.text = endingScore.text + "Press any key to restart.";
 	}
 	

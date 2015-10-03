@@ -5,6 +5,7 @@ public class OnHit : MonoBehaviour {
 
 
 	public GameObject fire;
+	public GameObject explosion;
 
 	private GameObject controller;
 	private int destroyScore = 10;
@@ -28,6 +29,8 @@ public class OnHit : MonoBehaviour {
 			Destroy(other.gameObject);
 			Destroy(this.gameObject);
 			controller.GetComponent<Spawner>().updateScore(destroyScore);
+			explosion = Instantiate(explosion, transform.position, new Quaternion(0,0,0,0)) as GameObject;
+			GameObject.Destroy(explosion, 2.0f);
 		}
 
 		else if (other.tag == "Explosion") {

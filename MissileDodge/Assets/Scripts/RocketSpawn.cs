@@ -23,7 +23,6 @@ public class RocketSpawn : MonoBehaviour {
 	void FixedUpdate () {
 
 		if (Vector3.Distance(transform.position,targetPosition) < 0.4) {
-			Debug.Log("ivan e ne bokluk");
 			explosion = Instantiate(explosion, transform.position, new Quaternion(0,0,0,0)) as GameObject;
  			GameObject.Destroy(explosion, 2.0f);
 			if (this.gameObject != null)

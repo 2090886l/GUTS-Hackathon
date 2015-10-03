@@ -26,7 +26,7 @@ public class Cannon : MonoBehaviour {
 	public int getShots() {
 		return shots;
 	}
-	// Use this for initialization
+
 	void Start () {
 	
 	}
