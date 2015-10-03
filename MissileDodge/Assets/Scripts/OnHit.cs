@@ -30,6 +30,11 @@ public class OnHit : MonoBehaviour {
 			controller.GetComponent<Spawner>().updateScore(destroyScore);
 		}
 
+		else if (other.tag == "Explosion") {
+			Destroy(this.gameObject);
+			controller.GetComponent<Spawner>().updateScore(destroyScore);
+		}
+
 		else if (other.tag == "Building") {
 			Destroy(other.gameObject);
 			Destroy(this.gameObject);

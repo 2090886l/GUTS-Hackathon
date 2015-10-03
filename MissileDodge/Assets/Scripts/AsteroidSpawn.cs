@@ -16,5 +16,6 @@ public class AsteroidSpawn : MonoBehaviour {
 		this.gameObject.GetComponent<Rigidbody2D> ().velocity = (targetPosition - transform.position).normalized * speed;
 	
 	}
+	
 
 }

@@ -47,8 +47,7 @@ public class Player : MonoBehaviour
 				}
 
 			}
-
-
+	
 
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
 		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  

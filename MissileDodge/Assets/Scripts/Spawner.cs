@@ -43,7 +43,9 @@ public class Spawner : MonoBehaviour {
 
 			
 			Vector3 spawnPosition = new Vector3 (Random.Range(startX, endX), roof, 0);
-			Instantiate(rocket, spawnPosition, new Quaternion(0,0,0,0));
+			rocket = Instantiate(rocket, spawnPosition, new Quaternion(0,0,0,0)) as GameObject;
+			float scale = Random.Range (0.1f, 0.3f);
+			rocket.transform.localScale = new Vector3(scale, scale, 0);
 			updateScore(spawnScore);
 		}
 	}
