@@ -141,13 +141,15 @@ public class Player : MonoBehaviour
 					
 					float swipeValue = Mathf.Sign(touch.position.y - startPos.y);
 					
-					if (swipeValue > 0) {
+					if (swipeValue > 0 && grounded) {
 						
 						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+
+
 					
 					// Make sure the player can't jump again until the jump conditions from Update are satisfied.
-					jump = false;
-					anim.SetBool("isGrounded", true);
+					jump = true;
+					anim.SetBool("isGrounded", false);
 
 					}
 				}
