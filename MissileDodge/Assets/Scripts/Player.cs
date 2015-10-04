@@ -22,6 +22,13 @@ public class Player : MonoBehaviour
 	Rigidbody2D player;
 
 
+	
+	public float minSwipeDistY;
+	
+	public float minSwipeDistX;
+	
+	private Vector2 startPos;
+	
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Cannon") {
@@ -96,9 +103,69 @@ public class Player : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
-		// Cache the horizontal input.
-		float h = Input.GetAxis("Horizontal");
-		float j = Input.GetAxisRaw ("Horizontal");
+
+		#if UNITY_STANDALONE || UNITY_WEBPLAYER		
+
+		float h = Input.GetAxis ("Horizontal");
+
+
+		#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+
+
+		if (Input.touchCount > 0) 
+			
+		{
+			
+			Touch touch = Input.touches[0];
+			
+			
+			
+			switch (touch.phase) 
+				
+			{
+				
+			case TouchPhase.Began:
+				
+				startPos = touch.position;
+				
+				break;
+				
+							
+			case TouchPhase.Ended:
+				
+				float swipeDistVertical = (new Vector3(0, touch.position.y, 0) - new Vector3(0, startPos.y, 0)).magnitude;
+				
+				if (swipeDistVertical > minSwipeDistY) 
+					
+				{
+					
+					float swipeValue = Mathf.Sign(touch.position.y - startPos.y);
+					
+					if (swipeValue > 0) {
+						
+						GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+					
+					// Make sure the player can't jump again until the jump conditions from Update are satisfied.
+					jump = false;
+					anim.SetBool("isGrounded", true);
+
+					}
+				}
+				
+
+				break;
+			}
+		}
+		
+		
+		float h = Input.acceleration.x;
+
+
+
+		if (Mathf.Abs (h) <= 0.1f) h = 0;
+		
+		#endif
+
 
 		anim.SetFloat ("Speed", Mathf.Abs (h));
 
@@ -106,6 +173,7 @@ public class Player : MonoBehaviour
 			Flip ();
 		if (h < 0 && facingRight)
 			Flip ();
+
 
 		
 		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
