@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour {
 	private int buildings;
 	private Vector3 targetPosition;
 	private GameObject[] cannons;
-
+	private int level = 1;
 	// Use this for initialization
 	void Start () {
 
@@ -34,40 +34,23 @@ public class Spawner : MonoBehaviour {
 		//rocket.transform.position = Vector3.MoveTowards(rocket.transform.position, targetPosition, step);
 	}
 
-	//test spawn waves; not in use right now
-	IEnumerator TestSpawnWaves ()
-	{
-		while (true)
-		{
-			
-			yield return new WaitForSeconds (1);
-			
-			
-			Vector3 spawnPosition = new Vector3 (0, 30, 0);
-			GameObject asteroid = Instantiate(rocket, spawnPosition, new Quaternion(0,0,0,0)) as GameObject;
-			if(asteroid != null){
-				float scale = Random.Range (0.1f, 0.3f);
-				asteroid.transform.localScale = new Vector3(scale, scale, 0);
-				updateScore(spawnScore);
-			}
-		}
-	}
-
 	IEnumerator SpawnWaves ()
 	{
 		while (true)
 		{
 	
-			yield return new WaitForSeconds (1);
+			yield return new WaitForSeconds (1.5f);
 
-			
-			Vector3 spawnPosition = new Vector3 (Random.Range(startX, endX), roof, 0);
-			GameObject asteroid = Instantiate(rocket, spawnPosition, new Quaternion(0,0,0,0)) as GameObject;
-			if (asteroid != null){
-				float scale = Random.Range (0.1f, 0.3f);
-				asteroid.transform.localScale = new Vector3(scale, scale, 0);
-				updateScore(spawnScore);
+			for (int j = 0; j < level/20 + 1; j++) {
+				Vector3 spawnPosition = new Vector3 (Random.Range(startX, endX), roof, 0);
+				GameObject asteroid = Instantiate(rocket, spawnPosition, new Quaternion(0,0,0,0)) as GameObject;
+				if (asteroid != null){
+					float scale = Random.Range (0.1f, 0.3f);
+					asteroid.transform.localScale = new Vector3(scale, scale, 0);
+					updateScore(spawnScore);
+				}
 			}
+			level++;
 		}
 	}
 
