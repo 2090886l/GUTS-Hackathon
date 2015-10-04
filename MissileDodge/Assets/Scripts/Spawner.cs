@@ -63,7 +63,7 @@ public class Spawner : MonoBehaviour {
 			
 			}
 			
-			yield return new WaitForSeconds (2);
+			yield return new WaitForSeconds (4);
 		}
 	}
 
