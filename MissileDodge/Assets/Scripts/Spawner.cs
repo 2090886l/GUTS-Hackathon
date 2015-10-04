@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour {
 
 
 	public GameObject rocket;
+	public GameObject temp;
 	public float startX;
 	public float endX;
 	public float roof;
@@ -19,6 +20,8 @@ public class Spawner : MonoBehaviour {
 	private int level = 1;
 	// Use this for initialization
 	void Start () {
+
+		rocket.GetComponent<SpriteRenderer> ().sprite = temp.GetComponent<SpriteRenderer> ().sprite;
 
 		buildings = 6;
 		cannons = GameObject.FindGameObjectsWithTag ("Cannon");
@@ -42,11 +45,16 @@ public class Spawner : MonoBehaviour {
 			yield return new WaitForSeconds (1.5f);
 
 			for (int j = 0; j < level/20 + 1; j++) {
+				Vector3 euler = transform.eulerAngles;
+				euler.z = Random.Range(0f, 360f);
+
 				Vector3 spawnPosition = new Vector3 (Random.Range(startX, endX), roof, 0);
 				GameObject asteroid = Instantiate(rocket, spawnPosition, new Quaternion(0,0,0,0)) as GameObject;
 				if (asteroid != null){
 					float scale = Random.Range (0.1f, 0.3f);
+					asteroid.transform.eulerAngles = euler;
 					asteroid.transform.localScale = new Vector3(scale, scale, 0);
+
 					updateScore(spawnScore);
 				}
 			}
