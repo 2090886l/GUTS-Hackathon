@@ -39,7 +39,6 @@ public class Spawner : MonoBehaviour {
 		while (true)
 		{
 	
-<<<<<<< Updated upstream
 			yield return new WaitForSeconds (1.5f);
 
 			for (int j = 0; j < level/20 + 1; j++) {
@@ -52,19 +51,6 @@ public class Spawner : MonoBehaviour {
 				}
 			}
 			level++;
-=======
-			yield return new WaitForSeconds (2);
-
-			for (int i = 0; true; i++) {
-				for (int j = 0; j<(i/10) + 1; j++) {
-					Vector3 spawnPosition = new Vector3 (Random.Range(startX, endX), roof, 0);
-					rocket = Instantiate(rocket, spawnPosition, new Quaternion(0,0,0,0)) as GameObject;
-					float scale = Random.Range (0.1f, 0.3f);
-					rocket.transform.localScale = new Vector3(scale, scale, 0);
-					updateScore(spawnScore);
-				}
-			}
->>>>>>> Stashed changes
 		}
 	}
 
