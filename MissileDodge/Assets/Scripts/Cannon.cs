@@ -5,10 +5,10 @@ public class Cannon : MonoBehaviour {
 
 	public GameObject rocket;
 
-	private int shots = 10;
+	private int shots = 5;
 
 	public void increaseShots() {
-		if (shots < 10) {
+		if (shots < 5) {
 			shots++;
 		}
 
@@ -20,8 +20,9 @@ public class Cannon : MonoBehaviour {
 			Instantiate(rocket, spawnPosition, new Quaternion(0,0,0,0));
 			shots--;
 		}
-
+		
 	}
+	
 
 	public int getShots() {
 		return shots;

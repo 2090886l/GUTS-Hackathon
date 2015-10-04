@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 	public float moveForce = 365f;			// Amount of force added to move the player left and right.
 	public float maxSpeed = 5f;				// The fastest the player can travel in the x axis.
 	public float jumpForce = 1000f;         // Amount of force added when the player jumps.
+	public GameObject[] ammo;
+	public GameObject ammoPosition;
 
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
 	private bool grounded = false;			// Whether or not the player is grounded.
@@ -19,10 +21,13 @@ public class Player : MonoBehaviour
 	bool facingRight = true;
 	Rigidbody2D player;
 
+
+
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Cannon") {
 			inCannon = true;
 			activeCannon = other;
+			ammoPosition.transform.position = other.transform.position + new Vector3(-2.1f,-2.5f,0);
 		}
 
 		if (other.tag == "Explosion") {
@@ -32,9 +37,23 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	void OnTriggerStay2D(Collider2D other) {
+		if (other.tag == "Cannon") {
+			for(int i = 0; i<activeCannon.GetComponentInParent<Cannon>().getShots(); i++){
+				ammo[i].GetComponentInChildren<SpriteRenderer>().enabled=true;
+			}
+			for(int i = 4; i>=activeCannon.GetComponentInParent<Cannon>().getShots(); i--){
+				ammo[i].GetComponentInChildren<SpriteRenderer>().enabled=false;
+			}
+			}
+	}
+
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.tag == "Cannon") {
 			inCannon = false;
+			for(int i = 4; i>=0; i--){
+				ammo[i].GetComponentInChildren<SpriteRenderer>().enabled=false;
+			}
 		}
 	}
 	void Awake()
